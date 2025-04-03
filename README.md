@@ -10,7 +10,7 @@ This project uses SQL Querying for performance analysis using real-time data fro
 
 - Understanding how to use SQL for data analysis tasks such as aggregation, filtering, and ranking.
 - Understanding how to calculate and manipulate data in a real-world dataset.
-- Gaining hands-on experience with SQL functions like `COUNT`, `SUM`, `AVG`, `EXTRACT()`, and `DENSE_RANK()`.
+- Gaining hands-on experience with SQL functions like `COUNT`, `SUM`, `AVG`, and `DENSE_RANK()`.
 - Develop skills for performance analysis using SQL by solving different types of data problems related to user performance.
 
 ## SQL Mentor User Performance Dataset
