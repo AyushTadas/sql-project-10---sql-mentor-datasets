@@ -4,13 +4,13 @@
 
 ## Project Overview 
 
-This project is designed to help beginners understand SQL querying and performance analysis using real-time data from SQL Mentor datasets. In this project, you will analyze user performance by creating and querying a table of user submissions. The goal is to solve a series of SQL problems to extract meaningful insights from user data.
+This project uses SQL Querying for performance analysis using real-time data from SQL Mentor datasets. In this project, I analyszed user performance by creating and querying a table of user submissions. The goal is to solve a series of SQL problems to extract meaningful insights from user data.
 
 ## Objectives
 
-- Learn how to use SQL for data analysis tasks such as aggregation, filtering, and ranking.
-- Understand how to calculate and manipulate data in a real-world dataset.
-- Gain hands-on experience with SQL functions like `COUNT`, `SUM`, `AVG`, `EXTRACT()`, and `DENSE_RANK()`.
+- Understanding how to use SQL for data analysis tasks such as aggregation, filtering, and ranking.
+- Understanding how to calculate and manipulate data in a real-world dataset.
+- Gaining hands-on experience with SQL functions like `COUNT`, `SUM`, `AVG`, `EXTRACT()`, and `DENSE_RANK()`.
 - Develop skills for performance analysis using SQL by solving different types of data problems related to user performance.
 
 ## SQL Mentor User Performance Dataset
@@ -22,7 +22,7 @@ The dataset consists of information about user submissions for an online learnin
 - **Submission Timestamp**
 - **Username**
 
-This data allows you to analyze user performance in terms of correct and incorrect submissions, total points earned, and daily/weekly activity.
+This data allows us to analyze user performance in terms of correct and incorrect submissions, total points earned, and daily/weekly activity.
 
 ## SQL Problems and Questions
 
