@@ -143,4 +143,4 @@ ORDER BY week_no, total_points_earned DESC;
 
 ## Conclusion
 
-This project provides an excellent opportunity for beginners to apply their SQL knowledge to solve practical data problems. By working through these SQL queries, you'll gain hands-on experience with data aggregation, ranking, date manipulation, and conditional logic.
+This project provided an excellent opportunity for me to apply my SQL knowledge to solve practical data problems. By working through these SQL queries, I gained hands-on experience with data aggregation, ranking, date manipulation, and conditional logic.
