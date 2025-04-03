@@ -1,8 +1,8 @@
-# SQL Mentor User Performance Analysis | Project No.10
+# SQL Mentor User Performance Analysis 
 
-![SQL Data Analytics](https://github.com/najirh/sql-project-10---sql-mentor-datasets/blob/main/Unknown-5.jpg)
 
-## Project Overview
+
+## Project Overview 
 
 This project is designed to help beginners understand SQL querying and performance analysis using real-time data from SQL Mentor datasets. In this project, you will analyze user performance by creating and querying a table of user submissions. The goal is to solve a series of SQL problems to extract meaningful insights from user data.
 
@@ -12,10 +12,6 @@ This project is designed to help beginners understand SQL querying and performan
 - Understand how to calculate and manipulate data in a real-world dataset.
 - Gain hands-on experience with SQL functions like `COUNT`, `SUM`, `AVG`, `EXTRACT()`, and `DENSE_RANK()`.
 - Develop skills for performance analysis using SQL by solving different types of data problems related to user performance.
-
-## Project Level: Beginner
-
-This project is designed for beginners who are familiar with the basics of SQL and want to learn how to handle real-world data analysis problems. You'll be working with a small dataset and writing SQL queries to solve different tasks that are commonly encountered in data analytics.
 
 ## SQL Mentor User Performance Dataset
 
@@ -30,7 +26,7 @@ This data allows you to analyze user performance in terms of correct and incorre
 
 ## SQL Problems and Questions
 
-Here are the SQL problems that you will solve as part of this project:
+Here are the SQL problems that I solved as part of this project:
 
 ### Q1. List All Distinct Users and Their Stats
 - **Description**: Return the user name, total submissions, and total points earned by each user.
@@ -52,7 +48,7 @@ Here are the SQL problems that you will solve as part of this project:
 - **Description**: Identify the top 10 users with the highest total points earned each week.
 - **Expected Output**: A report showing the top 10 users ranked by total points per week.
 
-## Key SQL Concepts Covered
+## Key SQL Concepts used
 
 - **Aggregation**: Using `COUNT`, `SUM`, `AVG` to aggregate data.
 - **Date Functions**: Using `EXTRACT()` and `TO_CHAR()` for manipulating dates.
@@ -68,21 +64,22 @@ Below are the solutions for each question in this project:
 ```sql
 SELECT 
     username,
-    COUNT(id) AS total_submissions,
+    COUNT(*) AS total_submissions,  -- Counts all rows, including those where `id` might be NULL
     SUM(points) AS points_earned
 FROM user_submissions
 GROUP BY username
 ORDER BY total_submissions DESC;
+
 ```
 
 ### Q2: Calculate the Daily Average Points for Each User
 ```sql
 SELECT 
-    TO_CHAR(submitted_at, 'DD-MM') AS day,
+    DATE_FORMAT(submitted_at, '%d-%m') AS day,
     username,
     AVG(points) AS daily_avg_points
 FROM user_submissions
-GROUP BY 1, 2
+GROUP BY day, username  -- Replaced "GROUP BY 1, 2" with explicit column names
 ORDER BY username;
 ```
 
@@ -90,11 +87,11 @@ ORDER BY username;
 ```sql
 WITH daily_submissions AS (
     SELECT 
-        TO_CHAR(submitted_at, 'DD-MM') AS daily,
+        DATE_FORMAT(submitted_at, '%d-%m') AS daily,
         username,
         SUM(CASE WHEN points > 0 THEN 1 ELSE 0 END) AS correct_submissions
     FROM user_submissions
-    GROUP BY 1, 2
+    GROUP BY daily, username
 ),
 users_rank AS (
     SELECT 
@@ -122,8 +119,9 @@ SELECT
     SUM(CASE WHEN points > 0 THEN points ELSE 0 END) AS correct_submissions_points_earned,
     SUM(points) AS points_earned
 FROM user_submissions
-GROUP BY 1
+GROUP BY username  -- Explicit column name instead of "GROUP BY 1"
 ORDER BY incorrect_submissions DESC;
+
 ```
 
 ### Q5: Find the Top 10 Performers for Each Week
@@ -131,15 +129,16 @@ ORDER BY incorrect_submissions DESC;
 SELECT *  
 FROM (
     SELECT 
-        EXTRACT(WEEK FROM submitted_at) AS week_no,
+        WEEK(submitted_at) AS week_no,
         username,
         SUM(points) AS total_points_earned,
-        DENSE_RANK() OVER(PARTITION BY EXTRACT(WEEK FROM submitted_at) ORDER BY SUM(points) DESC) AS rank
+        DENSE_RANK() OVER(PARTITION BY WEEK(submitted_at) ORDER BY SUM(points) DESC) AS rank
     FROM user_submissions
-    GROUP BY 1, 2
-    ORDER BY week_no, total_points_earned DESC
-)
-WHERE rank <= 10;
+    GROUP BY week_no, username
+) ranked_data
+WHERE rank <= 10
+ORDER BY week_no, total_points_earned DESC;
+
 ```
 
 ## Conclusion
